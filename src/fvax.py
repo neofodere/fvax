@@ -1,5 +1,5 @@
 import sys
-from pack import compress
+from converter import compress
 
 def main():
   if len(sys.argv) < 2:
