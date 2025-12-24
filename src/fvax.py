@@ -12,3 +12,5 @@ def main():
 
 if __name__ == "__main__":
   main()
+
+# FODSOFT. Neo Fodere de Frutos. All rights reserved.
