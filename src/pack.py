@@ -13,3 +13,5 @@ def compress(input_path: str) -> str:
     archive.write(input_file, arcname=input_file.name)
 
   return str(output_file)
+
+# FODSOFT(TM). Neo Fodere de Frutos. All rights reserved.
