@@ -1,5 +1,5 @@
 # FVAX
-<img src="images/logo_fvax.png">
+<img src="images/logo_fvax.png" width="575.5" height="auto">
 
 # 📖 Description
 >[!IMPORTANT]
