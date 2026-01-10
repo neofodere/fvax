@@ -3,9 +3,11 @@
 
 # 📖 Description
 >[!WARNING]
->FVAX is currently an experimental project.
+>FVAX is currently an experimental project in development, and not all features are available yet.
 
-FVAX (Fod Video-Audio eXperience) is a powerful and efficient multimedia file format currently in development by Néo Foderé de Frutos under the FODSOFT™ brand.
+FVAX (Fod Video-Audio eXperience) is an audio and video container format developed by Néo Foderé de Frutos under the FODSOFT™ brand.
+
+FVAX uses AV1 as its video codec and Opus as its audio codec.
 
 ## 📁 Project structure
 `src/Makefile`: Build automation file.
