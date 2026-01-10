@@ -12,7 +12,7 @@ FVAX (Fod Video-Audio eXperience) is a powerful and efficient multimedia file fo
 
 `src/compressor.c`: The format's compressor, which is responsible for removing fixed patterns.
 
-`src/converter.c`: The file responsible for converting any video file to the AV1 codec and the FVAX format, passing through the compressor **(src/compressor.c)**.
+`src/converter.c`: The file responsible for converting any video file to the FVAX format and AV1 codec, passing through the compressor **(src/compressor.c)**.
 
 `src/fvax.c`: The entry point of the project.
 
