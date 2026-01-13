@@ -1,7 +1,7 @@
 # FVAX
 <img src="images/logo_fvax.png" width="575.5" height="auto">
 
-# 📖 Description
+## 📖 Description
 >[!WARNING]
 >FVAX is currently an experimental project in development, and not all features are available yet.
 
