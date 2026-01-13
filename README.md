@@ -10,7 +10,7 @@ FVAX (Fod Video-Audio eXperience) is an audio and video container format develop
 FVAX uses AV1 as its video codec and Opus as its audio codec.
 
 ## <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/AGPLv3_Logo.svg/250px-AGPLv3_Logo.svg.png" width="64" height="auto"> License
-FVAX is distributed under the ***AGPLv3*** license. For more details, click [here](https://raw.githubusercontent.com/neofodere/fvax/refs/heads/main/LICENSE).
+FVAX is under the ***AGPLv3*** license. For more details, click [here](https://raw.githubusercontent.com/neofodere/fvax/refs/heads/main/LICENSE).
 
 ## 📁 Project structure
 `src/Makefile`: Build automation file.
