@@ -1,4 +1,4 @@
-# FVAX
+# <img src="images/icono_fvax.png" width="48" height="auto"> FVAX
 <img src="images/logo_fvax_b.png" width="575.5" height="auto">
 
 ## 📖 Description
