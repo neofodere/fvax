@@ -1,5 +1,5 @@
-# <img src="images/icono_archivo_fvax.png" width="32" height="auto"> FVAX
-<img src="images/logo_fvax_b.png" width="575.5" height="auto">
+# <img src="https://resources.fodsoft.com/images/png/icono_archivo_fvax.png" width="32" height="auto"> FVAX
+<img src="https://resources.fodsoft.com/images/png/logo_fvax_b.png" width="575.5" height="auto">
 
 ## 📖 Description
 >[!WARNING]
