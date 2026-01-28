@@ -13,61 +13,61 @@
 
 #include "fvax.h"
 
-int fvax_convert(const char *input_path, char **output_path) 
+int fvax_convert(const char *input_ruta, char **output_ruta) 
 {
-    size_t len = strlen(input_path);
-    char *ivf_path = malloc(len + 5);
-    if (!ivf_path) 
+    size_t len = strlen(input_ruta);
+    char *ivf_ruta = malloc(len + 5);
+    if (!ivf_ruta) 
     {
         printf("Memory allocation failed\n");
         return (1);
     }
-    strcpy(ivf_path, input_path);
-    char *dot = strrchr(ivf_path, '.');
+    strcpy(ivf_ruta, input_ruta);
+    char *dot = strrchr(ivf_ruta, '.');
     if (dot)
         *dot = '\0';
-    strcat(ivf_path, ".ivf");
-    *output_path = malloc(len + 6);
-    if (!*output_path)
+    strcat(ivf_ruta, ".ivf");
+    *output_ruta = malloc(len + 6);
+    if (!*output_ruta)
     {
         printf("Memory allocation failed\n");
-        free(ivf_path);
+        free(ivf_ruta);
         return (2);
     }
-    strcpy(*output_path, input_path);
-    dot = strrchr(*output_path, '.');
+    strcpy(*output_ruta, input_ruta);
+    dot = strrchr(*output_ruta, '.');
     if (dot)
         *dot = '\0';
-    strcat(*output_path, ".fvax");
+    strcat(*output_ruta, ".fvax");
     char command[4096];
     int nbr = snprintf(command, sizeof(command),
-        "ffmpeg -y -i \"%s\" -c:v libsvtav1 -an -f ivf \"%s\"", input_path, ivf_path);
+        "ffmpeg -y -i \"%s\" -c:v libsvtav1 -crf 40 -preset 8 -an -f ivf \"%s\"", input_ruta, ivf_ruta);
     if (nbr < 0 || (size_t)nbr >= sizeof(command)) 
     {
         printf("Failed to build ffmpeg command\n");
-        free(ivf_path);
-        free(*output_path);
+        free(ivf_ruta);
+        free(*output_ruta);
         return (3);
     }
     int ret = system(command);
     if (ret != 0) 
     {
         printf("ffmpeg command failed\n");
-        free(ivf_path);
-        free(*output_path);
+        free(ivf_ruta);
+        free(*output_ruta);
         return (4);
     }
-    int res = fvax_compress(ivf_path, *output_path);
+    int res = fvax_compress(ivf_ruta, *output_ruta);
     if (res != 0) 
     {
         printf("FVAX compression failed with code %d\n", res);
-        free(ivf_path);
-        free(*output_path);
-        *output_path = NULL;
+        free(ivf_ruta);
+        free(*output_ruta);
+        *output_ruta = NULL;
         return (res);
     }
-    remove(ivf_path);
-    free(ivf_path);
+    remove(ivf_ruta);
+    free(ivf_ruta);
     return (0);
 }
 // FODSOFT(TM). Neo Fodere de Frutos. All rights reserved.
