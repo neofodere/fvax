@@ -42,8 +42,8 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 		fprintf(stderr, "\x1b[38;2;255;89;89mError: FVAX file contains no video payload.\x1b[0m\n");
 		return (1);
 	}
-	FILE *video_salida = fopen(video_temp, "wb");
-    if (!video_salida)
+	FILE *salida_video = fopen(video_temp, "wb");
+    if (!salida_video)
 	{
 		fclose(archivo);
 		fprintf(stderr, "\x1b[38;2;255;89;89mError: Cannot create temp video file.\x1b[0m\n");
@@ -58,15 +58,15 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 		size_t bytes_leidos = fread(buffer, 1, chunk, archivo);
 		if (bytes_leidos == 0)
 			break;
-		fwrite(buffer, 1, bytes_leidos, video_salida);
+		fwrite(buffer, 1, bytes_leidos, salida_video);
 		bytes_restantes -= bytes_leidos;
 	}
-	fclose(video_salida);
+	fclose(salida_video);
 	int tiene_audio = (header.pos_audio != 0 && header.tamano_audio != 0);
 	if (tiene_audio)
 	{
-		FILE *out_audio = fopen(audio_temp, "wb");
-		if (!out_audio)
+		FILE *salida_audio = fopen(audio_temp, "wb");
+		if (!salida_audio)
 		{
 			fclose(archivo);
 			fprintf(stderr, "\x1b[38;2;255;89;89mError: Cannot create temp audio file.\x1b[0m\n");
@@ -81,10 +81,10 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 			size_t bytes_leidos = fread(buffer, 1, chunk, archivo);
 			if (bytes_leidos == 0)
 				break;
-			fwrite(buffer, 1, bytes_leidos, out_audio);
+			fwrite(buffer, 1, bytes_leidos, salida_audio);
 			bytes_restantes -= bytes_leidos;
 		}
-		fclose(out_audio);
+		fclose(salida_audio);
 	}
 	fclose(archivo);
 	char comando[2048];
