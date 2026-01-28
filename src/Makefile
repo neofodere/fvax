@@ -19,7 +19,7 @@ SRC =	fvax.c \
 OBJ = $(SRC:.c=.o)
 
 CC ?= gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -D_FILE_OFFSET_BITS=64
 
 ifeq ($(OS),Windows_NT)
 	EXE = $(NAME).exe
