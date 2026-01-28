@@ -44,9 +44,9 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 	int tiene_audio = 0;
 
 	snprintf(comando, sizeof(comando),
-		"ffprobe -v error -select_streams v:0 -show_entries stream=codec_type -of csv=p=0 \"%s\" > fvax_hasvideo.tmp", ruta_entrada);
+		"ffprobe -v error -select_streams v:0 -show_entries stream=codec_type -of csv=p=0 \"%s\" > fvax_hasvideo.fvaxtmp", ruta_entrada);
 	system(comando);
-	FILE *archivo_metadatos = fopen("fvax_hasvideo.tmp", "r");
+	FILE *archivo_metadatos = fopen("fvax_hasvideo.fvaxtmp", "r");
 	if (archivo_metadatos)
 	{
 		char tipo[32];
@@ -54,7 +54,7 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 			tiene_video = 1;
 		fclose(archivo_metadatos);
     }
-    remove("fvax_hasvideo.tmp");
+    remove("fvax_hasvideo.fvaxtmp");
 	if (tiene_video)
 	{
 		snprintf(comando, sizeof(comando),
@@ -83,20 +83,20 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 	if (tiene_video)
 	{
 		snprintf(comando, sizeof(comando),
-			"ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0:s=x \"%s\" > fvax_res.tmp",
+			"ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0:s=x \"%s\" > fvax_res.fvaxtmp",
 			ruta_entrada);
 		system(comando);
-		archivo_metadatos = fopen("fvax_res.tmp", "r");
+		archivo_metadatos = fopen("fvax_res.fvaxtmp", "r");
 		if (archivo_metadatos)
 		{
 			fscanf(archivo_metadatos, "%dx%d", &ancho, &alto);
 			fclose(archivo_metadatos);
 		}
 		snprintf(comando, sizeof(comando),
-			"ffprobe -v error -select_streams v:0 -show_entries stream=r_frame_rate -of csv=p=0 \"%s\" > fvax_fps.tmp",
+			"ffprobe -v error -select_streams v:0 -show_entries stream=r_frame_rate -of csv=p=0 \"%s\" > fvax_fps.fvaxtmp",
 			ruta_entrada);
 		system(comando);
-		archivo_metadatos = fopen("fvax_fps.tmp", "r");
+		archivo_metadatos = fopen("fvax_fps.fvaxtmp", "r");
 		if (archivo_metadatos)
 		{
 			int num = 0, den = 1;
@@ -107,10 +107,10 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 			fclose(archivo_metadatos);
 		}
 		snprintf(comando, sizeof(comando),
-			"ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames -of csv=p=0 \"%s\" > fvax_frames.tmp",
+			"ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames -of csv=p=0 \"%s\" > fvax_frames.fvaxtmp",
 			ruta_entrada);
 		system(comando);
-		archivo_metadatos = fopen("fvax_frames.tmp", "r");
+		archivo_metadatos = fopen("fvax_frames.fvaxtmp", "r");
 		if (archivo_metadatos)
 		{
 			fscanf(archivo_metadatos, "%u", &total_frames);
@@ -122,10 +122,10 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
     if (tiene_audio)
 	{
 		snprintf(comando, sizeof(comando),
-			"ffprobe -v error -select_streams a:0 -show_entries stream=sample_rate,channels -of csv=p=0 \"%s\" > fvax_audio.tmp",
+			"ffprobe -v error -select_streams a:0 -show_entries stream=sample_rate,channels -of csv=p=0 \"%s\" > fvax_audio.fvaxtmp",
 			ruta_entrada);
 		system(comando);
-		archivo_metadatos = fopen("fvax_audio.tmp", "r");
+		archivo_metadatos = fopen("fvax_audio.fvaxtmp", "r");
 		if (archivo_metadatos)
 		{
 			fscanf(archivo_metadatos, "%u,%hu", &frecuencia_audio, &canales_audio);
@@ -193,14 +193,14 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 	if (tiene_video)
 	{
 		remove("fvax_video_tmp.ivf");
-		remove("fvax_res.tmp");
-		remove("fvax_fps.tmp");
-		remove("fvax_frames.tmp");
+		remove("fvax_res.fvaxtmp");
+		remove("fvax_fps.fvaxtmp");
+		remove("fvax_frames.fvaxtmp");
 	}
 	if (tiene_audio)
 	{
 		remove("fvax_audio_tmp.opus");
-		remove("fvax_audio.tmp");
+		remove("fvax_audio.fvaxtmp");
 	}
 	return (0);
 }
