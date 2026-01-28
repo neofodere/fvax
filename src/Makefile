@@ -13,7 +13,6 @@
 NAME = fvax
 
 SRC =   fvax.c \
-        encoder.c \
         converter.c
 
 OBJ = $(SRC:.c=.o)
