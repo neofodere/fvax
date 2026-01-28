@@ -12,29 +12,31 @@
 
 NAME = fvax
 
-SRC =   fvax.c \
-        encoder.c \
-		decoder.c \
+SRC =	fvax.c \
+		encoder.c \
+		decoder.c
 
 OBJ = $(SRC:.c=.o)
 
 CC ?= gcc
 CFLAGS = -Wall -Wextra -Werror
 
-ifeq (, $(shell command -v $(CC)))
-	CC := /usr/bin/gcc
+ifeq ($(OS),Windows_NT)
+	EXE = $(NAME).exe
+else
+	EXE = $(NAME)
 endif
 
-all: $(NAME)
+all: $(EXE)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+$(EXE): $(OBJ)
+	$(CC) $(CFLAGS) -o $(EXE) $(OBJ)
 
 clean:
 	rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(EXE)
 
 re: fclean all
 
