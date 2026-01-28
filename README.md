@@ -15,7 +15,7 @@ FVAX is under the ***AGPLv3*** license. For more details, click [here](https://r
 ## 📁 Project structure
 `src/Makefile`: Build automation file.
 
-`src/compressor.c`: The format's compressor, which is responsible for removing fixed patterns.
+`src/encoder.c`: The format's compressor, which is responsible for removing fixed patterns.
 
 `src/converter.c`: The file responsible for converting any video file to the FVAX format and AV1 codec, passing through the compressor **(src/compressor.c)**.
 
