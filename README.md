@@ -14,7 +14,7 @@ FVAX is under the ***AGPLv3*** license.
 All redistributions or modified versions of FVAX must keep the line:
 `© FODSOFT™. Néo Foderé de Frutos. All rights reserved.`
 
-- You must **keep the AGPLv3 license**.  
+- You must **keep the AGPLv3 license.**
 Any modified version of FVAX must be released under the same license, with no exceptions.
 
 - You must **provide the full source code** of any modified version.  
@@ -38,7 +38,9 @@ This closes the “SaaS loophole” and ensures transparency even in server-side
 For more details, click [here](https://raw.githubusercontent.com/neofodere/fvax/refs/heads/main/LICENSE).
 
 ## 📁 Project structure
-`src/Makefile`: Build automation file.
+Path | Description |
+|----|-------------|
+| **src/Makefile** | Build automation file. |
 
 `src/encoder.c`: The file responsible for converting any video file into the FVAX container using the AV1 and Opus codecs.
 
