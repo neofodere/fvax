@@ -22,6 +22,7 @@ static void imprimir_cabecera(void)
 	printf("     \\ \\  \\_| \\ \\    / /   \\ \\  \\ \\  \\  /     \\/  \n");
 	printf("      \\ \\__\\   \\ \\__/ /     \\ \\__\\ \\__\\/___/\\__\\  \n");
 	printf("       \\|__|    \\|__|/       \\|__|\\|__/___/ /\\ _\\ \n");
+	printf("\x1b[38;2;125;125;125m<== FVAX (Fod Video-Audio eXperience) - FODSOFT(TM) ==>\x1b[0m\n");
 }
 
 static void mostrar_ayuda(void)
@@ -50,7 +51,6 @@ int main(int argc, char **argv)
 			return (1);
 		}
 		imprimir_cabecera();
-		printf("\x1b[38;2;125;125;125m<== FVAX (Fod Video-Audio eXperience) - FODSOFT(TM) ==>\x1b[0m\n");
 		int resultado_encode = fvax_encode(argv[2], argv[3]);
 		if (resultado_encode != 0)
 		{
@@ -70,7 +70,6 @@ int main(int argc, char **argv)
 			return (1);
 		}
 		imprimir_cabecera();
-		printf("\x1b[38;2;125;125;125m<== FVAX (Fod Video-Audio eXperience) - FODSOFT(TM) ==>\x1b[0m\n");
 		int resultado_decode = fvax_decode(argv[2], argv[3]);
 		if (resultado_decode != 0)
 		{
