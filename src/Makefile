@@ -7,13 +7,14 @@
 #      \ \__\   \ \__/ /     \ \__\ \__\/___/\__\  
 #       \|__|    \|__|/       \|__|\|__/___/ /\ _\ 
 #    
-#    FVAX and all related titles and logos are trademarks of FODSOFT™ (Néo Foderé de Frutos). All rights reserved.
+#    FVAX and all related titles and logos are trademarks of FODSOFT(TM). Neo Fodere de Frutos. All rights reserved.
 #    FVAX is licensed under the AGPLv3. More information at "https://github.com/neofodere/fvax/blob/main/LICENSE".
 
 NAME = fvax
 
 SRC =   fvax.c \
-        converter.c
+        encoder.c \
+		decoder.c \
 
 OBJ = $(SRC:.c=.o)
 
