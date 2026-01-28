@@ -184,7 +184,7 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 			fclose(archivo_salida);
 			if (tiene_video)
 				remove(video_temp);
-			remove(audio_temp):
+			remove(audio_temp);
 			return (-1);
 		}
 	}
