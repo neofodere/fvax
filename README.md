@@ -9,7 +9,7 @@ FVAX uses <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/AV
 ## <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/AGPLv3_Logo.svg/250px-AGPLv3_Logo.svg.png" width="64" height="auto"> License
 FVAX is under the ***AGPLv3*** license. 
 
-### 📜 Conditions
+### 📜 License conditions
 - You must preserve the original copyright notice.  
 All redistributions or modified versions of FVAX must keep the line:
 `© FODSOFT™. Néo Foderé de Frutos. All rights reserved.`
