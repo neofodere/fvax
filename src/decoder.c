@@ -37,8 +37,8 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 		return (1);
 	}
 
-	const char *video_temp = "tmp_dec_video.ivf";
-	const char *audio_temp = "tmp_dec_audio.opus";
+	const char *video_temp = "tmp_dec_video.ivf.raw";
+	const char *audio_temp = "tmp_dec_audio.opus.raw";
 	int tiene_video = (header.pos_video != 0 && header.tamano_video != 0);
 	int tiene_audio = (header.pos_audio != 0 && header.tamano_audio != 0);
 
@@ -95,7 +95,7 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 		snprintf
 		(
 			comando, sizeof(comando),
-			"ffmpeg -y -i \"%s\" -i \"%s\" -c:v copy -c:a copy \"%s\"",
+			"ffmpeg -y -f av1 -i \"%s\" -f opus -i \"%s\" -c:v libaom-av1 -c:a libopus \"%s\"",
 			video_temp, audio_temp, ruta_salida
 		);
 	}
@@ -104,7 +104,7 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 		snprintf
 		(
 			comando, sizeof(comando),
-			"ffmpeg -y -i \"%s\" -c:v copy \"%s\"",
+			"ffmpeg -y -f av1 -i \"%s\" -c:v libaom-av1 \"%s\"",
 			video_temp, ruta_salida
 		);
 	}
@@ -113,7 +113,7 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 		snprintf
 		(
 			comando, sizeof(comando),
-			"ffmpeg -y -i \"%s\" -c:a copy \"%s\"",
+			"ffmpeg -y -f opus -i \"%s\" -c:a libopus \"%s\"",
 			audio_temp, ruta_salida
 		);
 	}
