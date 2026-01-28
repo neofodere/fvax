@@ -46,5 +46,7 @@ File | Description |
 | **src/fvax.c** | The entry point of the program. |
 | **src/Makefile** | The header containing the definitions, declarations, and libraries. |
 
+## 
+
 **© 2026 FODSOFT™. Néo Foderé de Frutos. All rights reserved.**
 <!-- FODSOFT(TM). Neo Fodere de Frutos. All rights reserved. -->
