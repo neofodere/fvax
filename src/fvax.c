@@ -51,6 +51,7 @@ int main(int argc, char **argv)
 			return (1);
 		}
 		imprimir_cabecera();
+		printf("\x1b[38;2;80;140;220mEncoding... Please wait.\x1b[0m\n");
 		int resultado_encode = fvax_encode(argv[2], argv[3]);
 		if (resultado_encode != 0)
 		{
@@ -70,6 +71,7 @@ int main(int argc, char **argv)
 			return (1);
 		}
 		imprimir_cabecera();
+		printf("\x1b[38;2;80;140;220mEncoding... Please wait.\x1b[0m\n");
 		int resultado_decode = fvax_decode(argv[2], argv[3]);
 		if (resultado_decode != 0)
 		{
