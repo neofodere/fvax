@@ -1,11 +1,11 @@
 /*
- ________ ___      ___ ________     ___    ___ 
-|\  _____\\  \    /  /|\   __  \   |\  \  /  /|
-\ \  \__/\ \  \  /  / | \  \|\  \  \ \  \/  / /
- \ \   __\\ \  \/  / / \ \   __  \  \ \    / / 
-  \ \  \_| \ \    / /   \ \  \ \  \  /     \/  
-   \ \__\   \ \__/ /     \ \__\ \__\/___/\__\  
-    \|__|    \|__|/       \|__|\|__/___/ /\ _\ 
+    ________ ___      ___ ________     ___    ___ 
+   |\  _____\\  \    /  /|\   __  \   |\  \  /  /|
+   \ \  \__/\ \  \  /  / | \  \|\  \  \ \  \/  / /
+    \ \   __\\ \  \/  / / \ \   __  \  \ \    / / 
+     \ \  \_| \ \    / /   \ \  \ \  \  /     \/  
+      \ \__\   \ \__/ /     \ \__\ \__\/___/\__\  
+       \|__|    \|__|/       \|__|\|__/___/ /\ _\ 
     
     FVAX and all related titles and logos are trademarks of FODSOFT™ (Néo Foderé de Frutos). All rights reserved.
     FVAX is licensed under the AGPLv3. More information at "https://github.com/neofodere/fvax/blob/main/LICENSE".
