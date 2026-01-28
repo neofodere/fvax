@@ -22,6 +22,8 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 		return (1);
 	}
 	header_fvax header;
+	uint64_t bytes_restantes = 0;
+	unsigned char buffer[8192];
 	if (fread(&header, 1, sizeof(header), archivo) != sizeof(header))
 	{
 		fclose(archivo);
@@ -50,8 +52,7 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 			return (1);
 		}
 		fseek(archivo, (long)header.pos_video, SEEK_SET);
-		uint64_t bytes_restantes = header.tamano_video;
-		unsigned char buffer[8192];
+		bytes_restantes = header.tamano_video;
 		while (bytes_restantes > 0)
 		{
 			size_t chunk = bytes_restantes > sizeof(buffer) ? sizeof(buffer) : (size_t)bytes_restantes;
@@ -70,7 +71,8 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 		{
 			fclose(archivo);
 			fprintf(stderr, "\x1b[38;2;255;89;89mError: Cannot create temp audio file.\x1b[0m\n");
-			remove(video_temp);
+			if (tiene_video)
+				remove(video_temp);
 			return (1);
 		}
 		fseek(archivo, (long)header.pos_audio, SEEK_SET);
