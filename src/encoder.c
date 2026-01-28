@@ -161,7 +161,7 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 			remove(video_temp);
 			if (tiene_audio)
 				remove(audio_temp);
-			return (-1); 
+			return (-1);
 		}
 	}
 	else
@@ -176,6 +176,8 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 		{
 			fprintf(stderr, "\x1b[38;2;255;89;89mError: The audio could not be embedded into the FVAX container.\x1b[0m\n");
 			fclose(archivo_salida);
+			if (tiene_video)
+				remove(video_temp);
 			return (-1);
 		}
 	}
