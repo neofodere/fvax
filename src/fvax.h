@@ -24,22 +24,22 @@
 
 typedef struct
 {
-    char header[6];
-    char copyright[61];
-    uint8_t  reserva[32];
-    uint16_t tamano_header;
-    uint16_t ancho;
-    uint16_t alto;
-    uint16_t canales_audio;
-    uint32_t numerador_fps;
-    uint32_t denominador_fps;
-    uint32_t total_frames;
-    uint32_t frecuencia_audio;
-    uint64_t pos_video;
-    uint64_t tamano_video;
-    uint64_t pos_audio;
-    uint64_t tamano_audio;
-    uint64_t tamano_archivo;
+	char header[6];
+	char copyright[61];
+	uint8_t  reserva[32];
+	uint16_t tamano_header;
+	uint16_t ancho;
+	uint16_t alto;
+	uint16_t canales_audio;
+	uint32_t numerador_fps;
+	uint32_t denominador_fps;
+	uint32_t total_frames;
+	uint32_t frecuencia_audio;
+	uint64_t pos_video;
+	uint64_t tamano_video;
+	uint64_t pos_audio;
+	uint64_t tamano_audio;
+	uint64_t tamano_archivo;
 } header_fvax;
 
 int fvax_encode(const char *ruta_entrada, const char *ruta_salida);
