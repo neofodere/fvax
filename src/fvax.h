@@ -40,8 +40,7 @@ typedef struct
     uint8_t reserved[32];
 } fvax_header;
 
-int fvax_encode(const char *input_path, const char *output_path);
-int fvax_convert(const char *input_path, char **output_path);
+int fvax_convert(const char *ruta_entrada, char **ruta_salida);
 
 #endif
 // FODSOFT(TM). Neo Fodere de Frutos. All rights reserved.
