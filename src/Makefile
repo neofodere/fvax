@@ -33,7 +33,7 @@ $(EXE): $(OBJ)
 	$(CC) $(CFLAGS) -o $(EXE) $(OBJ)
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) *.fvaxtmp
 
 fclean: clean
 	rm -f $(EXE)
