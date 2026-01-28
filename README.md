@@ -38,17 +38,13 @@ This closes the “SaaS loophole” and ensures transparency even in server-side
 For more details, click [here](https://raw.githubusercontent.com/neofodere/fvax/refs/heads/main/LICENSE).
 
 ## 📁 Project structure
-Path | Description |
+File | Description |
 |----|-------------|
 | **src/Makefile** | Build automation file. |
-
-`src/encoder.c`: The file responsible for converting any video file into the FVAX container using the AV1 and Opus codecs.
-
-`src/decoder.c`: The file responsible for converting any FVAX file to a standard format.
-
-`src/fvax.c`: The entry point of the project.
-
-`src/fvax.h`: The header containing the definitions, declarations, and libraries.
+| **src/encoder.c** | The responsible for converting any video file into the FVAX container using the AV1 and Opus codecs. |
+| **src/decoder.c** | The responsible for converting any FVAX file to a standard format. |
+| **src/fvax.c** | The entry point of the program. |
+| **src/Makefile** | The header containing the definitions, declarations, and libraries. |
 
 **© 2026 FODSOFT™. Néo Foderé de Frutos. All rights reserved.**
 <!-- FODSOFT(TM). Neo Fodere de Frutos. All rights reserved. -->
