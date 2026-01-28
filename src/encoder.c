@@ -38,70 +38,94 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 	FILE *archivo_salida = NULL;
 	header_fvax header;
 	char comando[2048];
-	const char *video_temp = "tmp_fvax_video.ivf";
-	const char *audio_temp = "tmp_fvax_audio.opus";
+	const char *video_temp = "fvax_video_tmp.ivf";
+	const char *audio_temp = "fvax_audio_tmp.opus";
+	int tiene_video = 0;
+	int tiene_audio = 0;
 
 	snprintf(comando, sizeof(comando),
-		"ffmpeg -y -i \"%s\" -c:v libaom-av1 -crf 30 -b:v 0 -pix_fmt yuv420p -an \"%s\"", ruta_entrada, video_temp);
-	if (system(comando) != 0)
+		"ffprobe -v error -select_streams v:0 -show_entries stream=codec_type -of csv=p=0 \"%s\" > fvax_hasvideo.tmp", ruta_entrada);
+	system(comando);
+	FILE *archivo_metadatos = fopen("fvax_hasvideo.tmp", "r");
+	if (archivo_metadatos)
 	{
-		fprintf(stderr, "\x1b[38;2;255;89;89mError: ffmpeg couldn’t encode the video.\x1b[0m\n");
-		return (-1);
+		char tipo[32];
+		if (fscanf(archivo_metadatos, "%31s", tipo) == 1)
+			tiene_video = 1;
+		fclose(archivo_metadatos);
     }
-    snprintf(comando, sizeof(comando),
+    remove("fvax_hasvideo.tmp");
+	if (tiene_video)
+	{
+		snprintf(comando, sizeof(comando),
+			"ffmpeg -y -i \"%s\" -c:v libaom-av1 -crf 30 -b:v 0 -pix_fmt yuv420p -an \"%s\"", ruta_entrada, video_temp);
+		if (system(comando) != 0)
+		{
+			fprintf(stderr, "\x1b[38;2;255;89;89mError: ffmpeg couldn’t encode the video.\x1b[0m\n");
+			return (-1);
+	    }
+	}
+	snprintf(comando, sizeof(comando),
 		"ffmpeg -y -i \"%s\" -vn -c:a libopus -b:a 128k \"%s\"", ruta_entrada, audio_temp);
-	int tiene_audio = (system(comando) == 0);
-	if (!tiene_audio)
+	if (system(comando) == 0)
+		tiene_audio = 1;
+	else
+	{
+		tiene_audio = 0;
 		remove(audio_temp);
+	}
 	int ancho = 0;
 	int alto = 0;
 	double fps = 0.0;
 	uint32_t total_frames = 0;
 	uint32_t frecuencia_audio = 0;
 	uint16_t canales_audio = 0;
-	snprintf(comando, sizeof(comando),
-		"ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0:s=x \"%s\" > tmp_fvax_res.txt",
-		ruta_entrada);
-	system(comando);
-	FILE *archivo_metadatos = fopen("tmp_fvax_res.txt", "r");
-	if (archivo_metadatos)
+	if (tiene_video)
 	{
-		fscanf(archivo_metadatos, "%dx%d", &ancho, &alto);
-		fclose(archivo_metadatos);
+		snprintf(comando, sizeof(comando),
+			"ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0:s=x \"%s\" > fvax_res.tmp",
+			ruta_entrada);
+		system(comando);
+		archivo_metadatos = fopen("fvax_res.tmp", "r");
+		if (archivo_metadatos)
+		{
+			fscanf(archivo_metadatos, "%dx%d", &ancho, &alto);
+			fclose(archivo_metadatos);
+		}
+		snprintf(comando, sizeof(comando),
+			"ffprobe -v error -select_streams v:0 -show_entries stream=r_frame_rate -of csv=p=0 \"%s\" > fvax_fps.tmp",
+			ruta_entrada);
+		system(comando);
+		archivo_metadatos = fopen("fvax_fps.tmp", "r");
+		if (archivo_metadatos)
+		{
+			int num = 0, den = 1;
+			if (fscanf(archivo_metadatos, "%d/%d", &num, &den) == 2 && den != 0)
+				fps = (double)num / (double)den;
+			if (fps <= 0.0) 
+				fps = 30.0;
+			fclose(archivo_metadatos);
+		}
+		snprintf(comando, sizeof(comando),
+			"ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames -of csv=p=0 \"%s\" > fvax_frames.tmp",
+			ruta_entrada);
+		system(comando);
+		archivo_metadatos = fopen("fvax_frames.tmp", "r");
+		if (archivo_metadatos)
+		{
+			fscanf(archivo_metadatos, "%u", &total_frames);
+			fclose(archivo_metadatos);
+		}
+		if (total_frames == 0)
+			total_frames = 1;
 	}
-	snprintf(comando, sizeof(comando),
-		"ffprobe -v error -select_streams v:0 -show_entries stream=r_frame_rate -of csv=p=0 \"%s\" > tmp_fvax_fps.txt",
-		ruta_entrada);
-	system(comando);
-	archivo_metadatos = fopen("tmp_fvax_fps.txt", "r");
-	if (archivo_metadatos)
-	{
-		int num = 0, den = 1;
-		if (fscanf(archivo_metadatos, "%d/%d", &num, &den) == 2 && den != 0)
-			fps = (double)num / (double)den;
-		if (fps <= 0.0) 
-			fps = 30.0;
-		fclose(archivo_metadatos);
-	}
-	snprintf(comando, sizeof(comando),
-		"ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames -of csv=p=0 \"%s\" > tmp_fvax_frames.txt",
-		ruta_entrada);
-	system(comando);
-	archivo_metadatos = fopen("tmp_fvax_frames.txt", "r");
-	if (archivo_metadatos)
-	{
-		fscanf(archivo_metadatos, "%u", &total_frames);
-		fclose(archivo_metadatos);
-	}
-	if (total_frames == 0)
-		total_frames = 1;
     if (tiene_audio)
 	{
 		snprintf(comando, sizeof(comando),
-			"ffprobe -v error -select_streams a:0 -show_entries stream=sample_rate,channels -of csv=p=0 \"%s\" > tmp_fvax_audio.txt",
+			"ffprobe -v error -select_streams a:0 -show_entries stream=sample_rate,channels -of csv=p=0 \"%s\" > fvax_audio.tmp",
 			ruta_entrada);
 		system(comando);
-		archivo_metadatos = fopen("tmp_fvax_audio.txt", "r");
+		archivo_metadatos = fopen("fvax_audio.tmp", "r");
 		if (archivo_metadatos)
 		{
 			fscanf(archivo_metadatos, "%u,%hu", &frecuencia_audio, &canales_audio);
@@ -127,15 +151,23 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 		return (-1);
     }
 	fwrite(&header, 1, sizeof(header), archivo_salida);
-	header.pos_video = ftell(archivo_salida);
-	if (incrustar_bytes(archivo_salida, video_temp, &header.tamano_video) != 0) 
-	{ 
-		fprintf(stderr, "\x1b[38;2;255;89;89mError: The video could not be embedded into the FVAX container.\x1b[0m\n");
-		fclose(archivo_salida); 
-		remove(video_temp);
-		if (tiene_audio)
-			remove(audio_temp);
-		return (-1); 
+	if (tiene_video)
+	{
+		header.pos_video = ftell(archivo_salida);
+		if (incrustar_bytes(archivo_salida, video_temp, &header.tamano_video) != 0) 
+		{ 
+			fprintf(stderr, "\x1b[38;2;255;89;89mError: The video could not be embedded into the FVAX container.\x1b[0m\n");
+			fclose(archivo_salida); 
+			remove(video_temp);
+			if (tiene_audio)
+				remove(audio_temp);
+			return (-1); 
+		}
+	}
+	else
+	{
+		header.pos_video = 0;
+		header.tamano_video = 0;
 	}
     if (tiene_audio)
 	{
@@ -147,7 +179,7 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 			return (-1);
 		}
 	}
-	else 
+	else
 	{
 		header.pos_audio = 0;
 		header.tamano_audio = 0;
@@ -156,13 +188,18 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 	fseek(archivo_salida, 0, SEEK_SET);
 	fwrite(&header, 1, sizeof(header), archivo_salida);
 	fclose(archivo_salida);
-	remove("tmp_fvax_video.ivf");
-	remove("tmp_fvax_audio.opus");
-	remove("tmp_fvax_res.txt");
-	remove("tmp_fvax_fps.txt");
-	remove("tmp_fvax_frames.txt");
+	if (tiene_video)
+	{
+		remove("fvax_video_tmp.ivf");
+		remove("fvax_res.tmp");
+		remove("fvax_fps.tmp");
+		remove("fvax_frames.tmp");
+	}
 	if (tiene_audio)
-		remove("tmp_fvax_audio.txt");
+	{
+		remove("fvax_audio_tmp.opus");
+		remove("fvax_audio.tmp");
+	}
 	return (0);
 }
 // FODSOFT(TM). Neo Fodere de Frutos. All rights reserved.
