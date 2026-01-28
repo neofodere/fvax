@@ -25,7 +25,7 @@
 typedef struct
 {
 	char header[6];
-	char copyright[61];
+	char copyright[62];
 	uint8_t  reserva[32];
 	uint16_t tamano_header;
 	uint16_t ancho;
