@@ -37,7 +37,7 @@ This closes the “SaaS loophole” and ensures transparency even in server-side
 
 For more details, click [here](https://raw.githubusercontent.com/neofodere/fvax/refs/heads/main/LICENSE).
 
-## 📁 Project structure
+## 📂 Source code structure
 File | Description |
 |----|-------------|
 | **src/Makefile** | Build automation file. |
