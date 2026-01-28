@@ -12,3 +12,9 @@
 */
 
 #include "fvax.h"
+
+int fvax_decode(const char *ruta_input, const char *ruta_output)
+{
+
+}
+// FODSOFT(TM). Neo Fodere de Frutos. All rights reserved.
