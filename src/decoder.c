@@ -95,7 +95,7 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 		snprintf
 		(
 			comando, sizeof(comando),
-			"ffmpeg -y -i \"%s\" -i \"%s\" -c:v copy -c:a copy \"%s\"",
+			"ffmpeg -y -loglevel quiet -hide_banner -i \"%s\" -i \"%s\" -c:v copy -c:a copy \"%s\"",
 			video_temp, audio_temp, ruta_salida
 		);
 	}
@@ -104,7 +104,7 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 		snprintf
 		(
 			comando, sizeof(comando),
-			"ffmpeg -y -i \"%s\" -c:v copy \"%s\"",
+			"ffmpeg -y -loglevel quiet -hide_banner -i \"%s\" -c:v copy \"%s\"",
 			video_temp, ruta_salida
 		);
 	}
@@ -113,7 +113,7 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 		snprintf
 		(
 			comando, sizeof(comando),
-			"ffmpeg -y -i \"%s\" -c:a copy \"%s\"",
+			"ffmpeg -y -loglevel quiet -hide_banner -i \"%s\" -c:a copy \"%s\"",
 			audio_temp, ruta_salida
 		);
 	}
