@@ -15,6 +15,9 @@
 #define FVAX_H
 
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define HEADER_FVAX "[FVAX]"
 #define COPYRIGHT_FVAX "(c) - FODSOFT(TM). Neo Fodere de Frutos. All rights reserved."
@@ -38,6 +41,8 @@ typedef struct
     uint64_t tamano_audio;
     uint64_t tamano_archivo;
 } header_fvax;
+
+int fvax_encode(const char *ruta_entrada, const char *ruta_salida);
 
 #endif
 // FODSOFT(TM). Neo Fodere de Frutos. All rights reserved.
