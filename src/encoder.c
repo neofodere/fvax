@@ -18,7 +18,6 @@ static int incrustar_bytes(FILE *archivo_fvax, const char *archivo_temp, uint64_
 	FILE *archivo = fopen(archivo_temp, "rb");
 	if (!archivo)
 		return (-1);
-
 	uint8_t buffer[8192];
 	size_t bytes_leidos;
 	uint64_t bytes_copiados = 0;
