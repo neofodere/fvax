@@ -31,38 +31,38 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 	if (memcmp(header.header, HEADER_FVAX, 6) != 0)
 	{
 		fclose(archivo);
-		fprintf(stderr, "\x1b[38;2;255;89;89mError: Invalid FVAX magic header.\x1b[0m\n");
+		fprintf(stderr, "\x1b[38;2;255;89;89mError: Invalid FVAX header.\x1b[0m\n");
 		return (1);
 	}
+
 	const char *video_temp = "tmp_dec_video.ivf";
 	const char *audio_temp = "tmp_dec_audio.opus";
-	if (header.tamano_video == 0 || header.pos_video == 0)
-	{
-		fclose(archivo);
-		fprintf(stderr, "\x1b[38;2;255;89;89mError: FVAX file contains no video payload.\x1b[0m\n");
-		return (1);
-	}
-	FILE *salida_video = fopen(video_temp, "wb");
-    if (!salida_video)
-	{
-		fclose(archivo);
-		fprintf(stderr, "\x1b[38;2;255;89;89mError: Cannot create temp video file.\x1b[0m\n");
-		return (1);
-	}
-	fseek(archivo, (long)header.pos_video, SEEK_SET);
-	uint64_t bytes_restantes = header.tamano_video;
-	unsigned char buffer[8192];
-	while (bytes_restantes > 0)
-	{
-		size_t chunk = bytes_restantes > sizeof(buffer) ? sizeof(buffer) : (size_t)bytes_restantes;
-		size_t bytes_leidos = fread(buffer, 1, chunk, archivo);
-		if (bytes_leidos == 0)
-			break;
-		fwrite(buffer, 1, bytes_leidos, salida_video);
-		bytes_restantes -= bytes_leidos;
-	}
-	fclose(salida_video);
+	int tiene_video = (header.pos_video != 0 && header.tamano_video != 0);
 	int tiene_audio = (header.pos_audio != 0 && header.tamano_audio != 0);
+
+	if (tiene_video)
+	{
+		FILE *salida_video = fopen(video_temp, "wb");
+	    if (!salida_video)
+		{
+			fclose(archivo);
+			fprintf(stderr, "\x1b[38;2;255;89;89mError: Cannot create temp video file.\x1b[0m\n");
+			return (1);
+		}
+		fseek(archivo, (long)header.pos_video, SEEK_SET);
+		uint64_t bytes_restantes = header.tamano_video;
+		unsigned char buffer[8192];
+		while (bytes_restantes > 0)
+		{
+			size_t chunk = bytes_restantes > sizeof(buffer) ? sizeof(buffer) : (size_t)bytes_restantes;
+			size_t bytes_leidos = fread(buffer, 1, chunk, archivo);
+			if (bytes_leidos == 0)
+				break;
+			fwrite(buffer, 1, bytes_leidos, salida_video);
+			bytes_restantes -= bytes_leidos;
+		}
+		fclose(salida_video);
+	}
 	if (tiene_audio)
 	{
 		FILE *salida_audio = fopen(audio_temp, "wb");
@@ -88,31 +88,41 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 	}
 	fclose(archivo);
 	char comando[2048];
-	if (tiene_audio)
+	if (tiene_video && tiene_audio)
 	{
 		snprintf
 		(
-			comando,
-			sizeof(comando),
+			comando, sizeof(comando),
 			"ffmpeg -y -i \"%s\" -i \"%s\" -c:v copy -c:a copy \"%s\"",
-			video_temp,
-			audio_temp,
-			ruta_salida
+			video_temp, audio_temp, ruta_salida
+		);
+	}
+	else if (tiene_video && !tiene_audio)
+	{
+		snprintf
+		(
+			comando, sizeof(comando),
+			"ffmpeg -y -i \"%s\" -c:v copy \"%s\"",
+			video_temp, ruta_salida
+		);
+	}
+	else if (!tiene_video && tiene_audio)
+	{
+		snprintf
+		(
+			comando, sizeof(comando),
+			"ffmpeg -y -i \"%s\" -c:a copy \"%s\"",
+			audio_temp, ruta_salida
 		);
 	}
 	else
 	{
-		snprintf
-		(
-			comando,
-			sizeof(comando),
-			"ffmpeg -y -i \"%s\" -c:v copy \"%s\"",
-			video_temp,
-			ruta_salida
-		);
+		fprintf(stderr, "\x1b[38;2;255;89;89mError: FVAX file does not contain audio or video.\x1b[0m\n");
+		return (1);
 	}
 	int resultado = system(comando);
-	remove(video_temp);
+	if (tiene_video)
+		remove(video_temp);
 	if (tiene_audio)
 		remove(audio_temp);
 	if (resultado != 0)
