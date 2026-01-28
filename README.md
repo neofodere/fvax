@@ -47,6 +47,7 @@ File | Description |
 | **src/Makefile** | The header containing the definitions, declarations, and libraries. |
 
 ## 
+**FVAX and all related trademarks and logos are property of FODSOFT™. Néo Foderé de Frutos.**
 
 **© 2026 FODSOFT™. Néo Foderé de Frutos. All rights reserved.**
 <!-- FODSOFT(TM). Neo Fodere de Frutos. All rights reserved. -->
