@@ -43,6 +43,7 @@ typedef struct
 } header_fvax;
 
 int fvax_encode(const char *ruta_entrada, const char *ruta_salida);
+int fvax_decode(const char *ruta_entrada, const char *ruta_salida);
 
 #endif
 // FODSOFT(TM). Neo Fodere de Frutos. All rights reserved.
