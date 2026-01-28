@@ -58,7 +58,13 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 	if (tiene_video)
 	{
 		snprintf(comando, sizeof(comando),
-			"ffmpeg -y -i \"%s\" -c:v libaom-av1 -crf 30 -b:v 0 -pix_fmt yuv420p -an \"%s\"", ruta_entrada, video_temp);
+			"ffmpeg -y -loglevel quiet -i \"%s\" "
+			"-c:v libaom-av1 -crf 38 -b:v 0 -vf \"fps=30\" "
+			"-cpu-used 0 -g 300 -lag-in-frames 30 "
+			"-auto-alt-ref 1 -row-mt 1 "
+			"-pix_fmt yuv420p -an \"%s\"",
+			ruta_entrada, video_temp
+		);
 		if (system(comando) != 0)
 		{
 			fprintf(stderr, "\x1b[38;2;255;89;89mError: ffmpeg couldn’t encode the video.\x1b[0m\n");
@@ -66,7 +72,11 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 	    }
 	}
 	snprintf(comando, sizeof(comando),
-		"ffmpeg -y -i \"%s\" -vn -c:a libopus -b:a 128k \"%s\"", ruta_entrada, audio_temp);
+		"ffmpeg -y -loglevel quiet -i \"%s\" -vn "
+		"-c:a libopus -b:a 96k -compression_level 10 "
+		"-frame_duration 60 -application audio \"%s\"",
+		ruta_entrada, audio_temp
+	);
 	if (system(comando) == 0)
 		tiene_audio = 1;
 	else
@@ -174,6 +184,7 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 			fclose(archivo_salida);
 			if (tiene_video)
 				remove(video_temp);
+			remove(audio_temp):
 			return (-1);
 		}
 	}
