@@ -87,7 +87,7 @@ int main(int argc, char **argv)
     }
 	else if (strcmp(argv[1], "/version") == 0 || strcmp(argv[1], "--version") == 0)
     {
-        printf("FVAX v1.0\n(c) 2026 FODSOFT(TM). Neo Fodere de Frutos. All rights reserved.\n");
+        printf("FVAX v0.1\n(c) 2026 FODSOFT(TM). Neo Fodere de Frutos. All rights reserved.\n");
         return (0);
     }
 	fprintf(stderr, "\x1b[38;2;255;89;89mError: Unknown command '%s'.\x1b[0m\n", argv[1]);
