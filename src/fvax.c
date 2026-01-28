@@ -61,7 +61,7 @@ int main(int argc, char **argv)
 		return (0);
     }
 
-    if (strcmp(argv[1], "decode") == 0)
+    else if (strcmp(argv[1], "decode") == 0)
     {
 		if (argc != 4)
 		{
@@ -81,7 +81,7 @@ int main(int argc, char **argv)
 		return (0);
     }
 
-	if (strcmp(argv[1], "/help") == 0 || strcmp(argv[1], "--help") == 0)
+	else if (strcmp(argv[1], "/help") == 0 || strcmp(argv[1], "--help") == 0)
     {
         mostrar_ayuda();
         return (0);
