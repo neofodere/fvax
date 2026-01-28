@@ -15,32 +15,29 @@
 #define FVAX_H
 
 #include <stdint.h>
-#include <stdio.h> 
-#include <stdlib.h>
-#include <string.h>
-#include <stddef.h>
 
-#define FVAX_MAGIC "FVAX"
-#define FVAX_VERSION "v1.0"
-#define FVAX_HEADER_SIZE
+#define HEADER_FVAX "[FVAX]"
+#define COPYRIGHT_FVAX "(c) - FODSOFT(TM). Neo Fodere de Frutos. All rights reserved."
 
 typedef struct
 {
-    char magic[4];
-    char version[8];
-    uint16_t header_size;
-    uint32_t flags;
-    uint16_t width;
-    uint16_t height;
-    uint32_t fps_num;
-    uint32_t fps_den;
-    uint32_t frame_count;
-    uint64_t file_size;
-    uint32_t header_crc;
-    uint8_t reserved[32];
-} fvax_header;
-
-int fvax_convert(const char *ruta_entrada, char **ruta_salida);
+    char header[6];
+    char copyright[61];
+    uint8_t  reserva[32];
+    uint16_t tamano_header;
+    uint16_t ancho;
+    uint16_t alto;
+    uint16_t canales_audio;
+    uint32_t numerador_fps;
+    uint32_t denominador_fps;
+    uint32_t total_frames;
+    uint32_t frecuencia_audio;
+    uint64_t pos_video;
+    uint64_t tamano_video;
+    uint64_t pos_audio;
+    uint64_t tamano_audio;
+    uint64_t tamano_archivo;
+} header_fvax;
 
 #endif
 // FODSOFT(TM). Neo Fodere de Frutos. All rights reserved.
