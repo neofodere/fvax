@@ -40,11 +40,11 @@ For more details, click [here](https://raw.githubusercontent.com/neofodere/fvax/
 ## 📂 Source code structure
 File | Description |
 |----|-------------|
-| **src/Makefile** | Build automation file. |
-| **src/encoder.c** | The responsible for converting any video file into the FVAX container using the AV1 and Opus codecs. |
-| **src/decoder.c** | The responsible for converting any FVAX file to a standard format. |
-| **src/fvax.c** | The entry point of the program. |
-| **src/Makefile** | The header containing the definitions, declarations, and libraries. |
+| src/**Makefile** | Build automation file. |
+| src/**encoder.c** | The responsible for converting any video file into the FVAX container using the AV1 and Opus codecs. |
+| src/**decoder.c** | The responsible for converting any FVAX file to a standard format. |
+| src/**fvax.c** | The entry point of the program. |
+| src/**Makefile** | The header containing the definitions, declarations, and libraries. |
 
 ## 
 
