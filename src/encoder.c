@@ -13,7 +13,7 @@
 
 #include "fvax.h"
 
-int fvax_encoder(const char *input_path, const char *output_path) 
+int fvax_encode(const char *input_path, const char *output_path) 
 {
     FILE *input = fopen(input_path, "rb");
     if (!input) 
