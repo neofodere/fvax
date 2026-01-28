@@ -45,12 +45,11 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 		"ffmpeg -y -i \"%s\" -c:v libaom-av1 -crf 30 -b:v 0 -pix_fmt yuv420p -an \"%s\"", ruta_entrada, video_temp);
 	if (system(comando) != 0)
 	{
-		fprintf(stderr, "Error: ffmpeg couldn’t encode the video.\n");
+		fprintf(stderr, "\x1b[38;2;255;89;89mError: ffmpeg couldn’t encode the video.\x1b[0m\n");
 		return (-1);
     }
     snprintf(comando, sizeof(comando),
 		"ffmpeg -y -i \"%s\" -vn -c:a libopus -b:a 128k \"%s\"", ruta_entrada, audio_temp);
-	
 	int tiene_audio = (system(comando) == 0);
 	if (!tiene_audio)
 		remove(audio_temp);
@@ -60,7 +59,6 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 	uint32_t total_frames = 0;
 	uint32_t frecuencia_audio = 0;
 	uint16_t canales_audio = 0;
-
 	snprintf(comando, sizeof(comando),
 		"ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0:s=x \"%s\" > tmp_fvax_res.txt",
 		ruta_entrada);
@@ -125,14 +123,14 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
     archivo_salida = fopen(ruta_salida, "wb");
 	if (!archivo_salida)
 	{
-		fprintf(stderr, "Error: The FVAX file could not be created.\n");
+		fprintf(stderr, "\x1b[38;2;255;89;89mError: The FVAX file could not be created.\x1b[0m\n");
 		return (-1);
     }
 	fwrite(&header, 1, sizeof(header), archivo_salida);
 	header.pos_video = ftell(archivo_salida);
 	if (incrustar_bytes(archivo_salida, video_temp, &header.tamano_video) != 0) 
 	{ 
-		fprintf(stderr, "Error: The video could not be embedded into the FVAX container.\n"); 
+		fprintf(stderr, "\x1b[38;2;255;89;89mError: The video could not be embedded into the FVAX container.\x1b[0m\n");
 		fclose(archivo_salida); 
 		remove(video_temp);
 		if (tiene_audio)
@@ -144,7 +142,7 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 		header.pos_audio = ftell(archivo_salida);
 		if (incrustar_bytes(archivo_salida, audio_temp, &header.tamano_audio) != 0)
 		{
-			fprintf(stderr, "Error: The audio could not be embedded into the FVAX container.\n");
+			fprintf(stderr, "\x1b[38;2;255;89;89mError: The audio could not be embedded into the FVAX container.\x1b[0m\n");
 			fclose(archivo_salida);
 			return (-1);
 		}
