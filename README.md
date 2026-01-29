@@ -9,9 +9,6 @@ FVAX uses <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/AV
 The FVAX encoder works by using **FFmpeg** to create a **WebM** and an **Ogg Opus** separately, and then combining them efficiently.
 
 ## 📚 Dependencies
->[!NOTE]
->I recommend using MSYS2 to compile or use FVAX on Windows.
-
 ### For usage
 - **FFmpeg** (5.0 or later recommended)
 
@@ -19,8 +16,8 @@ The FVAX encoder works by using **FFmpeg** to create a **WebM** and an **Ogg Opu
 - **GCC** (15 or later recommended)
 
 ## 🚀 Setup guide
->[!IMPORTANT]
->FVAX is still a proprietary format owned by FODSOFT™. You’re free to use it if you want, but you probably won’t find it very practical.
+>[!NOTE]
+>I recommend using MSYS2 to compile or use FVAX on Windows.
 
 ## 📂 Source code structure
 File | Description |
