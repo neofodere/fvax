@@ -24,7 +24,7 @@ File | Description |
 
 ## 
 
-**FVAX and all related trademarks and logos are property of FODSOFT™. Néo Foderé de Frutos.**
+**FVAX and all related titles and logos are property of FODSOFT™. Néo Foderé de Frutos.**
 
 **© 2026 FODSOFT™. Néo Foderé de Frutos. All rights reserved.**
 <!-- FODSOFT(TM). Neo Fodere de Frutos. All rights reserved. -->
