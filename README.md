@@ -10,10 +10,10 @@ The FVAX encoder works by using **FFmpeg** to create a **WebM** and an **Ogg Opu
 
 ## 📚 Dependencies
 ### For usage:
-- ![**FFmpeg**](https://github.com/FFmpeg/FFmpeg) (5.0 or later recommended)
+- [**FFmpeg**](https://github.com/FFmpeg/FFmpeg) (5.0 or later recommended)
 
 ### For compiling:
-- ![**GCC**](https://gcc.gnu.org/) (15 or later recommended)
+- [**GCC**](https://gcc.gnu.org/) (15 or later recommended)
 
 ## 🚀 Setup guide
 >[!NOTE]
