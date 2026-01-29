@@ -67,7 +67,7 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 		);
 		if (system(comando) != 0)
 		{
-			fprintf(stderr, "\x1b[38;2;255;89;89mError: ffmpeg couldn’t encode the video.\x1b[0m\n");
+			fprintf(stderr, "\x1b[38;2;255;89;89mError: ffmpeg couldn not encode the video.\x1b[0m\n");
 			return (-1);
 	    }
 	}
