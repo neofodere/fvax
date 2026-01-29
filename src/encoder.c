@@ -38,7 +38,7 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 	FILE *archivo_salida = NULL;
 	header_fvax header;
 	char comando[2048];
-	const char *video_temp = "fvaxenc.ivf";
+	const char *video_temp = "fvaxenc.webm";
 	const char *audio_temp = "fvaxenc.opus";
 	int tiene_video = 0;
 	int tiene_audio = 0;
@@ -199,7 +199,7 @@ int fvax_encode(const char *ruta_entrada, const char *ruta_salida)
 	fclose(archivo_salida);
 	if (tiene_video)
 	{
-		remove("fvaxenc.ivf");
+		remove("fvaxenc.webm");
 		remove("fvax_res.fvaxtmp");
 		remove("fvax_fps.fvaxtmp");
 		remove("fvax_frames.fvaxtmp");
