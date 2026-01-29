@@ -6,10 +6,17 @@ FVAX (Fod Video-Audio eXperience) is an audio and video container format develop
 
 FVAX uses <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/AV1_logo_2018.svg/1200px-AV1_logo_2018.svg.png" width="38" height="auto"> (***AV1***) as its video codec and <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Opus_logo2.svg/250px-Opus_logo2.svg.png" width="48" height="auto"> (***Opus***) as its audio codec.
 
-The FVAX encoder works by using **ffmpeg** to create a **WebM** and an **Ogg Opus** separately, and then combining them efficiently.
+The FVAX encoder works by using **FFmpeg** to create a **WebM** and an **Ogg Opus** separately, and then combining them efficiently.
 
-# 🚀 Setup guide
+# 📚 Dependencies
 
+- FFmpeg (5.0 or later recommended)
+
+- **[ONLY FOR COMPILE]** · GCC (c23 compatible version recommended)
+
+## 🚀 Setup guide
+>[!IMPORTANT]
+>FVAX is still a proprietary format owned by FODSOFT™. You’re free to use it if you want, but you probably won’t find much practical use for it.
 
 ## 📂 Source code structure
 File | Description |
