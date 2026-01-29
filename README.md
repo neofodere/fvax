@@ -25,7 +25,7 @@ The FVAX encoder works by using **FFmpeg** to create a **WebM** and an **Ogg Opu
 File | Description |
 |----|-------------|
 | src/**Makefile** | Build automation file. |
-| src/**encoder.c** | The responsible for converting any video file into the FVAX container using the AV1 and Opus codecs. |
+| src/**encoder.c** | The responsible for converting any video file into the FVAX container. |
 | src/**decoder.c** | The responsible for converting any FVAX file to a standard format. |
 | src/**fvax.c** | The entry point of the program. |
 | src/**fvax.h** | The header containing the definitions, the header struct... |
