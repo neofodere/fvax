@@ -19,6 +19,8 @@ The FVAX encoder works by using **FFmpeg** to create a **WebM** and an **Ogg Opu
 >[!NOTE]
 >I recommend using MSYS2 to compile or use FVAX on Windows.
 
+
+
 ## 📂 Source code structure
 File | Description |
 |----|-------------|
