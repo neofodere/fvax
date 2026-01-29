@@ -8,10 +8,8 @@ FVAX uses <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/AV
 
 The FVAX encoder works by using **ffmpeg** to create a **WebM** and an **Ogg Opus** separately, and then combining them efficiently.
 
-## <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/AGPLv3_Logo.svg/250px-AGPLv3_Logo.svg.png" width="64" height="auto"> License
-FVAX is under the ***AGPLv3*** license. FVAX is under the ***AGPLv3*** license. This means that if you want to distribute or use FVAX, you must comply with all the terms of the license.
+# 🚀 Setup guide
 
-For more details, click [here](https://raw.githubusercontent.com/neofodere/fvax/refs/heads/main/LICENSE).
 
 ## 📂 Source code structure
 File | Description |
@@ -21,6 +19,11 @@ File | Description |
 | src/**decoder.c** | The responsible for converting any FVAX file to a standard format. |
 | src/**fvax.c** | The entry point of the program. |
 | src/**fvax.h** | The header containing the definitions, declarations, and libraries. |
+
+## <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/AGPLv3_Logo.svg/250px-AGPLv3_Logo.svg.png" width="64" height="auto"> License
+FVAX is under the ***AGPLv3*** license. FVAX is under the ***AGPLv3*** license. This means that if you want to distribute or use FVAX, you must comply with all the terms of the license.
+
+For more details, click [here](https://raw.githubusercontent.com/neofodere/fvax/refs/heads/main/LICENSE).
 
 ## 
 
