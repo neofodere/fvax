@@ -37,7 +37,7 @@ int fvax_decode(const char *ruta_entrada, const char *ruta_salida)
 		return (1);
 	}
 
-	const char *video_temp = "fvaxdec.ivf";
+	const char *video_temp = "fvaxdec.webm";
 	const char *audio_temp = "fvaxdec.opus";
 	int tiene_video = (header.pos_video != 0 && header.tamano_video != 0);
 	int tiene_audio = (header.pos_audio != 0 && header.tamano_audio != 0);
