@@ -41,7 +41,7 @@ $(LINUX_EXE): $(OBJ)
 win:
 	$(MAKE) $(WIN_EXE)
 
-linux:
+linux: $(OBJ)
 	$(CC) $(CFLAGS) -o $(LINUX_EXE) $(OBJ)
 
 clean:
