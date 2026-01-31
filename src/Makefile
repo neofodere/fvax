@@ -21,8 +21,8 @@ OBJ = $(SRC:.c=.o)
 CC ?= gcc
 CFLAGS = -std=c23 -Wall -Wextra -Werror -O2 -D_FILE_OFFSET_BITS=64
 
-WIN_EXE = $(NAME).exe
-LINUX_EXE = $(NAME)
+WIN_EXE = $(NAME)-win.exe
+LINUX_EXE = $(NAME)-linux
 
 ifeq ($(OS),Windows_NT)
 	EXE = $(WIN_EXE)
@@ -35,14 +35,14 @@ all: $(EXE)
 $(WIN_EXE): $(OBJ)
 	$(CC) $(CFLAGS) -o $(WIN_EXE) $(OBJ)
 
-$(LINUX_EXE): $(OBJ)
-	$(CC) $(CFLAGS) -o $(LINUX_EXE) $(OBJ)
-
 win:
 	$(MAKE) $(WIN_EXE)
 
-linux: $(OBJ)
+$(LINUX_EXE): $(OBJ)
 	$(CC) $(CFLAGS) -o $(LINUX_EXE) $(OBJ)
+	@if [ -f "$(LINUX_EXE).exe" ]; then mv "$(LINUX_EXE).exe" "$(LINUX_EXE)"; fi
+
+linux: $(LINUX_EXE)
 
 clean:
 	rm -f $(OBJ) *.fvaxtmp
