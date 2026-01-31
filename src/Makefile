@@ -42,7 +42,7 @@ win:
 	$(MAKE) $(WIN_EXE)
 
 linux:
-	$(MAKE) $(LINUX_EXE)
+	$(CC) $(CFLAGS) -o $(LINUX_EXE) $(OBJ)
 
 clean:
 	rm -f $(OBJ) *.fvaxtmp
