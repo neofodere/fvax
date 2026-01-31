@@ -2,11 +2,11 @@
 <img src="https://resources.fodsoft.com/images/ext/logo_fvax_b.png" width="512" height="auto">
 
 ## 📖 Description
-FVAX (Fod Video-Audio eXperience) is an audio and video container format developed by Néo Foderé de Frutos under the FODSOFT™ brand.
+FVAX (Fod Video-Audio eXperience) is an audio and video container format written in C and developed by Néo Foderé de Frutos under the FODSOFT™ brand.
 
 FVAX uses <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/AV1_logo_2018.svg/1200px-AV1_logo_2018.svg.png" width="38" height="auto"> (***AV1***) as its video codec and <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Opus_logo2.svg/250px-Opus_logo2.svg.png" width="48" height="auto"> (***Opus***) as its audio codec.
 
-The FVAX encoder works by using **FFmpeg** to create a **WebM** and an **Ogg Opus** separately, and then combining them efficiently.
+The FVAX encoder works by using **FFmpeg** to create a **WebM (.webm)** and an **Ogg Opus (.opus)** separately, and then concatenating them inside the FVAX structure.
 
 ## 📚 Dependencies
 ### For usage:
