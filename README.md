@@ -31,7 +31,7 @@ File | Description |
 | src/**fvax.h** | The header containing the definitions, the header struct... |
 
 ## <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/AGPLv3_Logo.svg/250px-AGPLv3_Logo.svg.png" width="64" height="auto"> License
-FVAX is under the ***AGPLv3*** license. FVAX is under the ***AGPLv3*** license. This means that if you want to distribute or use FVAX, you must comply with all the terms of the license.
+FVAX is under the ***AGPLv3*** license. This means that if you want to distribute or use FVAX, you must comply with all the terms of the license.
 
 For more details, click [here](https://raw.githubusercontent.com/neofodere/fvax/refs/heads/main/LICENSE).
 
