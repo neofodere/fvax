@@ -21,8 +21,8 @@ OBJ = $(SRC:.c=.o)
 CC ?= gcc
 CFLAGS = -std=c23 -Wall -Wextra -Werror -O2 -D_FILE_OFFSET_BITS=64
 
-WIN_EXE = $(NAME)-win.exe
-LINUX_EXE = $(NAME)-linux
+WIN_EXE = $(NAME).exe
+LINUX_EXE = $(NAME)
 
 ifeq ($(OS),Windows_NT)
 	EXE = $(WIN_EXE)
